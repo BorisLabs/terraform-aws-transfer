@@ -37,7 +37,7 @@ resource "aws_iam_role" "logging" {
 }
 
 module "test" {
-  source                = "../"
+  source                = "..\/.."
   logging_role_arn      = "${aws_iam_role.logging.arn}"
   create_route53_record = true
   route53_record_zone   = "${aws_route53_zone.test.zone_id}"

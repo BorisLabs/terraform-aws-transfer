@@ -19,6 +19,7 @@ variable "endpoint_type" {
 }
 
 variable "create_route53_record" {
+  description = "Whether to create the Route53 Record."
   default = false
 }
 

@@ -13,8 +13,8 @@ variable "create_iam_role" {
 
 variable "iam_role_policy_statements" {
   description = "JSON of iam policy statements"
-  default = []
-  type = "list"
+  default     = []
+  type        = "list"
 }
 
 variable "iam_role_arn" {
@@ -22,3 +22,8 @@ variable "iam_role_arn" {
   default     = ""
 }
 
+variable "tags" {
+  description = "Tags to attach to transfer user"
+  default     = {}
+  type        = "map"
+}

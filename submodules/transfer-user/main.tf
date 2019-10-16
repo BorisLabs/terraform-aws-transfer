@@ -2,6 +2,7 @@ resource "aws_transfer_user" "this" {
   role      = "${var.create_iam_role? aws_iam_role.this.arn : var.iam_role_arn}"
   server_id = "${var.transfer_server_id}"
   user_name = "${var.user_name}"
+  tags      = "${var.tags}"
 }
 
 

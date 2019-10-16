@@ -13,8 +13,7 @@ variable "create_iam_role" {
 
 variable "iam_role_policy_statements" {
   description = "JSON of iam policy statements"
-  default     = []
-  type        = "list"
+  default     = ""
 }
 
 variable "iam_role_arn" {
@@ -26,4 +25,9 @@ variable "tags" {
   description = "Tags to attach to transfer user"
   default     = {}
   type        = "map"
+}
+
+variable "home_directory" {
+  description = "specify home directory of Transnfer User"
+  default     = ""
 }

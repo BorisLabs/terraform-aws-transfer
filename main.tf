@@ -10,6 +10,7 @@ resource "aws_transfer_server" "this" {
 }
 
 resource "aws_route53_record" "this" {
+  provider = "aws.dns"
   count   = "${var.create_route53_record ? 1 : 0}"
   name    = "${var.route53_record_name}"
   type    = "CNAME"

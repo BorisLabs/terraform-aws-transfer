@@ -38,7 +38,7 @@ variable "add_transfer_ssh_keys" {
 }
 
 variable "transfer_ssh_key_bodys" {
-  description = "Public key part of SSH Key for Transfer user being created. Ignored if use_ssm = true"
+  description = "Public key part of SSH Key for Transfer user being created."
   default     = []
   type        = "list"
 }
@@ -48,7 +48,8 @@ variable "use_ssm" {
   default     = false
 }
 
-variable "transfer_ssh_key_ssm_path" {
-  description = "SSM Parameter store path to retrieve public key from"
-  default     = "/transfer/users/user"
+variable "transfer_ssh_key_ssm_paths" {
+  description = "List of SSM Parameter store paths to retrieve public key from."
+  type        = "list"
+  default     = ["/transfer/users/user"]
 }

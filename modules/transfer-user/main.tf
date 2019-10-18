@@ -1,5 +1,5 @@
 locals {
-  keys_count = "${var.use_ssm ? 1 : length(var.transfer_ssh_key_bodys)}"
+  all_key_bodies = "${concat(var.transfer_ssh_key_bodys, data.aws_ssm_parameter.user_ssh_key.*.value)}"
 }
 
 resource "aws_transfer_user" "this" {
@@ -11,8 +11,8 @@ resource "aws_transfer_user" "this" {
 }
 
 resource "aws_transfer_ssh_key" "ssh_key" {
-  count     = "${var.add_transfer_ssh_keys ? local.keys_count : 0}"
-  body      = "${var.use_ssm ? local.ssm_ssh_key_value : element(concat(var.transfer_ssh_key_bodys,list("")),count.index)}"
+  count     = "${var.add_transfer_ssh_keys ? length(local.all_key_bodies) : 0}"
+  body      = "${element(concat(local.all_key_bodies,list("")),count.index)}"
   server_id = "${var.transfer_server_id}"
   user_name = "${aws_transfer_user.this.user_name}"
 }
@@ -28,9 +28,3 @@ resource "aws_iam_role_policy" "inline_policy" {
   policy = "${data.aws_iam_policy_document.inline_policy.json}"
   role   = "${aws_iam_role.this.id}"
 }
-
-
-
-
-
-

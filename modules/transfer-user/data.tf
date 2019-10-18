@@ -15,11 +15,7 @@ data "aws_iam_policy_document" "inline_policy" {
 }
 
 data "aws_ssm_parameter" "user_ssh_key" {
-  count           = "${var.use_ssm? 1 : 0}"
-  name            = "${var.transfer_ssh_key_ssm_path}"
+  count           = "${var.use_ssm? length(var.transfer_ssh_key_ssm_paths) : 0}"
+  name            = "${element(var.transfer_ssh_key_ssm_paths,count.index)}"
   with_decryption = true
-}
-
-locals {
-  ssm_ssh_key_value = "${element(concat(data.aws_ssm_parameter.user_ssh_key.*.value, list("")),0)}"
 }

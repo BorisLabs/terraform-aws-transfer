@@ -1,11 +1,11 @@
 output "r53_record_fqdn" {
-  value = "${element(concat(aws_route53_record.this.*.fqdn, list("")),0)}"
+  value = element(concat(aws_route53_record.this.*.fqdn, [""]), 0)
 }
 
 output "transfer_server_endpoint" {
-  value = "${element(concat(aws_transfer_server.this.*.endpoint,list("")),0)}"
+  value = element(concat(aws_transfer_server.this.*.endpoint, [""]), 0)
 }
 
 output "transfer_server_id" {
-  value = "${element(concat(aws_transfer_server.this.*.id,list("")),0)}"
+  value = element(concat(aws_transfer_server.this.*.id, [""]), 0)
 }

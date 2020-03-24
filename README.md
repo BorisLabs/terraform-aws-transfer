@@ -8,7 +8,8 @@ The following resources are supported:
 * aws_transfer_user
 * aws_transfer_ssh_key
 
-This Module will optionally create a Route53 CNAME Record for the server endpoint.
+This Module will optionally create a Route53 CNAME Record for the server endpoint & also the IAM logging role. There's also some ability to create an internet facing Transfer service using the VPC.
+Terraform doesn't currently support this functionality, but this current PR is open [Terraform PR]("https://github.com/terraform-providers/terraform-provider-aws/pull/11751)
 
 
 ## Usage
@@ -49,7 +50,7 @@ module "transfer_user_key_bodys" {
 
 ## Terraform Versions
 This module supports Terraform v0.11 from v0.0.1
-Terraform v0.12 support is coming soon...
+This module supports Terraform v0.12
 
 ## Authors
 Module managed by  

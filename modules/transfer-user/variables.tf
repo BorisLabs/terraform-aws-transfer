@@ -24,7 +24,7 @@ variable "iam_role_arn" {
 variable "tags" {
   description = "Tags to attach to transfer user"
   default     = {}
-  type        = "map"
+  type        = map(string)
 }
 
 variable "home_directory" {
@@ -40,7 +40,7 @@ variable "add_transfer_ssh_keys" {
 variable "transfer_ssh_key_bodys" {
   description = "Public key part of SSH Key for Transfer user being created."
   default     = []
-  type        = "list"
+  type        = list(string)
 }
 
 variable "use_ssm" {
@@ -50,6 +50,7 @@ variable "use_ssm" {
 
 variable "transfer_ssh_key_ssm_paths" {
   description = "List of SSM Parameter store paths to retrieve public key from."
-  type        = "list"
+  type        = list(string)
   default     = ["/transfer/users/user"]
 }
+

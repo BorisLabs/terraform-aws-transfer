@@ -8,7 +8,8 @@ The following resources are supported:
 * aws_transfer_user
 * aws_transfer_ssh_key
 
-This Module will optionally create a Route53 CNAME Record for the server endpoint & also the IAM logging role. There's also some ability to create an internet facing Transfer service using the VPC.
+This Module will optionally create a Route53 CNAME Record for the server endpoint & also the IAM logging role. 
+There's also some ability to create an internet facing Transfer service using the VPC.
 Terraform doesn't currently support this functionality, but this current PR is open [Terraform PR]("https://github.com/terraform-providers/terraform-provider-aws/pull/11751)
 
 
@@ -24,7 +25,7 @@ module "transfer_server" {
 
 module "transfer_user_ssm_key_body" {
   source                    = "../../submodules/transfer-user"
-  transfer_server_id        = "${module.transfer_server.transfer_server_id}"
+  transfer_server_id        = module.transfer_server.transfer_server_id
   user_name                 = "test-user-1"
   add_transfer_ssh_keys     = true
   use_ssm                   = true
@@ -33,7 +34,7 @@ module "transfer_user_ssm_key_body" {
 
 module "transfer_user_key_bodys" {
   source                    = "../../submodules/transfer-user"
-  transfer_server_id        = "${module.transfer_server.transfer_server_id}"
+  transfer_server_id        = module.transfer_server.transfer_server_id
   user_name                 = "test-user-2-multi-keys"
   add_transfer_ssh_keys     = true
   transfer_ssh_key_bodys    = ["ssh-rsa aakmsdfkmsfgoker132443t909doweWFSMLKSEF", "ssh-rsa alksmafgk232939ASDOSEFOANOSAEF"]
@@ -50,7 +51,7 @@ module "transfer_user_key_bodys" {
 
 ## Terraform Versions
 This module supports Terraform v0.11 from v0.0.1
-This module supports Terraform v0.12
+This module supports Terraform v0.12 from v0.1.0
 
 ## Authors
 Module managed by  

@@ -7,7 +7,7 @@ variable "user_name" {
 }
 
 variable "create_iam_role" {
-  description = "TODO... Create an IAM role for the module"
+  description = "Create an IAM role for the module"
   default     = false
 }
 
@@ -54,3 +54,14 @@ variable "transfer_ssh_key_ssm_paths" {
   default     = ["/transfer/users/user"]
 }
 
+variable "home_directory_mappings" {
+  description = "Logical directory mappings that specify what S3 paths and keys should be visible to your user and how you want to make them visible"
+  default     = {}
+  type        = map(string)
+}
+
+variable "home_directory_type" {
+  description = "The type of landing directory (folder) you mapped for your users' home directory. Valid values are PATH and LOGICAL"
+  default     = "PATH"
+  type        = string
+}

@@ -50,13 +50,14 @@ module "transfer_user_key_bodys" {
 
 
 ## Terraform Versions
-This module supports Terraform v0.11 from v0.0.1
-This module supports Terraform v0.12 from v0.1.0
+This module supports Terraform v0.11 from v0.0.1   
+This module supports Terraform v0.12 from v0.2.0
+This module supports Terraform v0.13 from v0.3.0
 
 ## Authors
 Module managed by  
 [Rob Houghton](https://github.com/ALLFIVE)  
 [Josh Sinfield](https://github.com/JoshiiSinfield)  
-[Ben Arundel](https://github.com/barundel)
 
 ## Notes
+The ability to setup custom/password auth is currently still in WIP in PR #3

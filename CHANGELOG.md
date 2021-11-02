@@ -1,5 +1,12 @@
 All notable changes to this terraform will be documented in this file.
 
+# [0.4.0](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.3.0...v0.4.0) (2021-11-02)
+
+
+### Features
+
+* Add ability to set logical user home directory mappings to enabled restricted mode ([5e90779](https://github.com/BorisLabs/terraform-aws-transfer/commit/5e907794fe7d134b0dd575b800c3c7fbeb1df966))
+
 # [0.3.0](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.2.0...v0.3.0) (2021-11-02)
 
 

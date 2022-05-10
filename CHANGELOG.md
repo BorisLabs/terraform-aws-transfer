@@ -1,5 +1,12 @@
 All notable changes to this terraform will be documented in this file.
 
+## [0.4.1](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.4.0...v0.4.1) (2022-05-10)
+
+
+### Bug Fixes
+
+* remove terraform-version files ([0db1c1c](https://github.com/BorisLabs/terraform-aws-transfer/commit/0db1c1c1ba1d01fbc1132c38f0a83b4f28005a97))
+
 # [0.4.0](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.3.0...v0.4.0) (2021-11-02)
 
 

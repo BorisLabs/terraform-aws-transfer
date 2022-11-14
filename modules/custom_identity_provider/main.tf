@@ -29,18 +29,29 @@ resource "aws_iam_role_policy" "inline_policy" {
   name   = "LambdaSecretsPolicy"
 }
 
+resource "aws_iam_role_policy_attachment" "policy" {
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  role       = aws_iam_role.this_lambda[0].name
+}
+
 #
 # Lambda Deployment
 #
 resource "aws_lambda_function" "this_lambda" {
-  function_name = "TransferCustomIdentityProviderCredentialLookup"
-  handler       = "lambda.lambda_handler"
-  role          = coalesce(concat(aws_iam_role.this_lambda.*.arn, list(""))[0], var.lambda_role_arn)
-  runtime       = "python3.7"
-  description   = "A function to lookup and return user data from AWS Secrets Manager."
-  tags          = var.tags
+  function_name    = "TransferCustomIdentityProviderCredentialLookup"
+  handler          = "lambda.lambda_handler"
+  role             = coalesce(concat(aws_iam_role.this_lambda.*.arn, [])[0], var.lambda_role_arn)
+  runtime          = "python3.7"
+  description      = "A function to lookup and return user data from AWS Secrets Manager."
+  tags             = var.tags
+  filename         = "lib/lambda.zip"
+  source_code_hash = filebase64sha256("lib/lambda.zip")
+
   environment {
-    SECRET_BASE_PATH = var.secret_base_path
+    variables = {
+      SECRET_BASE_PATH     = var.secret_base_path
+      SecretsManagerRegion = data.aws_region.current.name
+    }
   }
 }
 
@@ -48,7 +59,7 @@ resource "aws_lambda_permission" "allow_apigw_invoke" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.this_lambda.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = aws_api_gateway_rest_api.this.execution_arn
+  source_arn    = "${aws_api_gateway_rest_api.this.execution_arn}/*/GET/servers/*/users/*/config"
 }
 
 #
@@ -106,13 +117,13 @@ resource "aws_api_gateway_model" "get_user_response_model" {
       HomeDirectory = {
         type = "string"
       }
-      Role          = {
+      Role = {
         type = "string"
       }
-      Policy        = {
-        type: "string"
+      Policy = {
+        type : "string"
       }
-      PublicKeys    = {
+      PublicKeys = {
         type  = "array"
         items = {
           type = "string"
@@ -140,32 +151,20 @@ resource "aws_api_gateway_method_response" "get_user_config_response" {
   rest_api_id     = aws_api_gateway_rest_api.this.id
   status_code     = "200"
   response_models = {
-    "application/json" = aws_api_gateway_model.get_user_response_model.id
+    "application/json" = "UserConfigResponseModel"
   }
 }
 
 resource "aws_api_gateway_integration" "get_user_config_post_integration" {
-  http_method       = "POST"
-  resource_id       = aws_api_gateway_resource.user_config.id
-  rest_api_id       = aws_api_gateway_rest_api.this.id
-  type              = "AWS"
+  http_method             = aws_api_gateway_method.get_user_config.http_method
+  integration_http_method = "POST"
+  resource_id             = aws_api_gateway_resource.user_config.id
+  rest_api_id             = aws_api_gateway_rest_api.this.id
+  type                    = "AWS"
   # arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/<lamba invoke arn>
-  uri               = join("", [
-    "arn:",
-    "aws:",
-    "apigateway:",
-    data.aws_region.current.name,
-    ":lambda:path/2015-03-31/functions/",
-    aws_lambda_function.this_lambda.invoke_arn
-  ])
-  request_templates = {
-    "application/json" = jsonencode({
-      "username": "$util.urlDecode($input.params('username'))"
-      "password": "$util.escapeJavaScript($input.params('Password')).replaceAll(\"\\\\'\",\"'\")"
-      "protocol": "$input.params('protocol')"
-      "serverId": "$input.params('serverId')"
-      "sourceIp": "$input.params('sourceIp')"
-    })
+  uri                     = aws_lambda_function.this_lambda.invoke_arn
+  request_templates       = {
+    "application/json" = "{ \"username\": \"$input.params('username')\", \"password\": \"$util.escapeJavaScript($input.params('Password')).replaceAll(\"\\\\'\",\"'\")\", \"serverId\": \"$input.params('serverId')\", \"protocol\": \"$input.params('protocol')\",\"sourceIp\": \"$input.params('sourceIp')\" }"
   }
 }
 

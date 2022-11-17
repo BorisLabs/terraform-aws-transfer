@@ -41,7 +41,7 @@ resource "aws_lambda_function" "this_lambda" {
   function_name    = "TransferCustomIdentityProviderCredentialLookup"
   handler          = "lambda.lambda_handler"
   role             = coalesce(concat(aws_iam_role.this_lambda.*.arn, [])[0], var.lambda_role_arn)
-  runtime          = "python3.7"
+  runtime          = "python3.9"
   description      = "A function to lookup and return user data from AWS Secrets Manager."
   tags             = var.tags
   filename         = "lib/lambda.zip"
@@ -49,8 +49,8 @@ resource "aws_lambda_function" "this_lambda" {
 
   environment {
     variables = {
-      SECRET_BASE_PATH     = var.secret_base_path
-      SecretsManagerRegion = data.aws_region.current.name
+      SECRET_BASE_PATH        = var.secret_base_path
+      SecretsManagerRegion    = data.aws_region.current.name
     }
   }
 }

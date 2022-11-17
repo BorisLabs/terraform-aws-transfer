@@ -1,5 +1,6 @@
 variable "transfer_server_id" {
   description = "ID of the AWs Transfer Server"
+  default = ""
 }
 
 variable "user_name" {
@@ -64,4 +65,9 @@ variable "home_directory_type" {
   description = "The type of landing directory (folder) you mapped for your users' home directory. Valid values are PATH and LOGICAL"
   default     = "PATH"
   type        = string
+}
+
+variable "create_transfer_user" {
+  description = "Create an transfer user"
+  default     = true
 }

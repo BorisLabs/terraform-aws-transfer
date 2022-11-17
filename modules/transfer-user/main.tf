@@ -7,6 +7,7 @@ locals {
 
 
 resource "aws_transfer_user" "this" {
+  count               = var.create_transfer_user ? 1 : 0
   role                = var.create_iam_role ? element(concat(aws_iam_role.this.*.arn, [""]), 0) : var.iam_role_arn
   server_id           = var.transfer_server_id
   user_name           = var.user_name
@@ -26,7 +27,7 @@ resource "aws_transfer_ssh_key" "ssh_key" {
   count     = var.add_transfer_ssh_keys ? length(local.all_key_bodies) : 0
   body      = element(concat(local.all_key_bodies, [""]), count.index)
   server_id = var.transfer_server_id
-  user_name = aws_transfer_user.this.user_name
+  user_name = aws_transfer_user.this[0].user_name
 }
 
 resource "aws_iam_role" "this" {

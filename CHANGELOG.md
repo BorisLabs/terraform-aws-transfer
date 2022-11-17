@@ -1,5 +1,12 @@
 All notable changes to this terraform will be documented in this file.
 
+# [0.7.0](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.6.0...v0.7.0) (2022-11-17)
+
+
+### Features
+
+* update-python-version-and-user-module ([21843c2](https://github.com/BorisLabs/terraform-aws-transfer/commit/21843c256f49cd80cc37aa5e467b1915129990ef))
+
 # [0.6.0](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.5.0...v0.6.0) (2022-11-17)
 
 

@@ -1,5 +1,12 @@
 All notable changes to this terraform will be documented in this file.
 
+# [0.6.0](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.5.0...v0.6.0) (2022-11-17)
+
+
+### Features
+
+* transfer-server-enhancements ([2c6a172](https://github.com/BorisLabs/terraform-aws-transfer/commit/2c6a172e4eb94f9d3e6aa52e799bc3a7956c6fbb))
+
 # [0.5.0](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.4.1...v0.5.0) (2022-11-17)
 
 

@@ -1,5 +1,12 @@
 All notable changes to this terraform will be documented in this file.
 
+# [0.5.0](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.4.1...v0.5.0) (2022-11-17)
+
+
+### Features
+
+* Add module to create custom identity provider ([a9b8550](https://github.com/BorisLabs/terraform-aws-transfer/commit/a9b8550665285b0d14403b594251b783ffdbf8db))
+
 ## [0.4.1](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.4.0...v0.4.1) (2022-05-10)
 
 

@@ -1,5 +1,12 @@
 All notable changes to this terraform will be documented in this file.
 
+## [0.7.1](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.7.0...v0.7.1) (2022-11-21)
+
+
+### Bug Fixes
+
+* Removing providers file that shouldn't really be in here. ([04ff76c](https://github.com/BorisLabs/terraform-aws-transfer/commit/04ff76c64dda59330cd0438131665295a46144e8))
+
 # [0.7.0](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.6.0...v0.7.0) (2022-11-17)
 
 

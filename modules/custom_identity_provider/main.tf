@@ -4,7 +4,10 @@
 resource "aws_iam_role" "this_transfer" {
   count              = var.create_transfer_iam_role ? 1 : 0
   assume_role_policy = data.aws_iam_policy_document.transfer_trust_policy.json
-  name               = "TransferCustomIdentityProviderRole"
+  name               = var.transfer_iam_role_name
+  tags               = merge({
+    Name = var.transfer_iam_role_name, Role = "${var.transfer_iam_role_name} iam role"
+  }, var.tags)
 }
 
 resource "aws_iam_role_policy" "transfer_inline_policy" {
@@ -19,7 +22,11 @@ resource "aws_iam_role_policy" "transfer_inline_policy" {
 resource "aws_iam_role" "this_lambda" {
   count              = var.create_lambda_iam_role ? 1 : 0
   assume_role_policy = data.aws_iam_policy_document.lambda_trust_policy.json
-  name               = "TransferCustomIdentityProviderLambdaRole"
+  name               = var.lambda_iam_role_name
+  tags               = merge({
+    Name = var.lambda_iam_role_name,
+    Role = "${var.lambda_iam_role_name} iam role"
+  }, var.tags )
 }
 
 resource "aws_iam_role_policy" "inline_policy" {
@@ -49,8 +56,8 @@ resource "aws_lambda_function" "this_lambda" {
 
   environment {
     variables = {
-      SECRET_BASE_PATH        = var.secret_base_path
-      SecretsManagerRegion    = data.aws_region.current.name
+      SECRET_BASE_PATH     = var.secret_base_path
+      SecretsManagerRegion = data.aws_region.current.name
     }
   }
 }
@@ -66,12 +73,16 @@ resource "aws_lambda_permission" "allow_apigw_invoke" {
 # API Gateway
 #
 resource "aws_api_gateway_rest_api" "this" {
-  name        = "Transfer Custom Identity Provider"
+  name        = var.api_gateway_rest_api_name
   description = "This API provides authentication for Transfer Family servers"
 
   endpoint_configuration {
     types = ["REGIONAL"]
   }
+  tags = merge({
+    Name = var.api_gateway_rest_api_name,
+    Role = "${var.api_gateway_rest_api_name} iam role"
+  }, var.tags)
 }
 
 resource "aws_api_gateway_resource" "servers" {
@@ -182,7 +193,12 @@ resource "aws_api_gateway_deployment" "this" {
 resource "aws_api_gateway_stage" "prod" {
   deployment_id = aws_api_gateway_deployment.this.id
   rest_api_id   = aws_api_gateway_rest_api.this.id
-  stage_name    = "prod"
+  stage_name    = var.api_gateway_stage_name
+  tags          = merge({
+    Name = "${aws_api_gateway_rest_api.this.name} stage ${var.api_gateway_stage_name}",
+    Role = "${aws_api_gateway_rest_api.this.name} stage ${var.api_gateway_stage_name}"
+  }, var.tags
+  )
 }
 
 resource "aws_api_gateway_method_settings" "settings" {

@@ -27,3 +27,27 @@ variable "tags" {
   default     = {}
   type        = map(string)
 }
+
+variable "transfer_iam_role_name" {
+  description = "Transfer server IAM role name"
+  default     = "TransferCustomIdentityProviderRole"
+  type        = string
+}
+
+variable "lambda_iam_role_name" {
+  description = "Lambda IAM role name"
+  default     = "TransferCustomIdentityProviderLambdaRole"
+  type        = string
+}
+
+variable "api_gateway_rest_api_name" {
+  default     = "Transfer Custom Identity Provider"
+  description = "Name of the REST API"
+  type        = string
+}
+
+variable "api_gateway_stage_name" {
+  default     = "prod"
+  description = "Name of the stage"
+  type        = string
+}

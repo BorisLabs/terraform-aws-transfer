@@ -39,8 +39,7 @@ resource "aws_iam_role" "logging" {
   assume_role_policy    = data.aws_iam_policy_document.trust_policy.json
   force_detach_policies = true
 
-  // Maybe Merge some IAM specific Tags.
-  tags = var.tags
+  tags = merge(var.tags, { Name = var.logging_role_name, Role = "${var.logging_role_name} iam role" })
 }
 
 resource "aws_iam_policy" "logging" {
@@ -49,6 +48,8 @@ resource "aws_iam_policy" "logging" {
   name   = var.logging_policy_name
   path   = var.iam_path
   policy = data.aws_iam_policy_document.logging.json
+
+  tags = merge(var.tags, { Name = var.logging_policy_name, Role = var.logging_policy_name })
 }
 
 resource "aws_eip" "this" {

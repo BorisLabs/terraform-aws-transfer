@@ -1,5 +1,12 @@
 All notable changes to this terraform will be documented in this file.
 
+## [0.7.2](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.7.1...v0.7.2) (2022-11-30)
+
+
+### Bug Fixes
+
+* use absolute path to lambda.zip ([5b0ec40](https://github.com/BorisLabs/terraform-aws-transfer/commit/5b0ec400928729c68b2080c5dcc3fedbc92d39eb))
+
 ## [0.7.1](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.7.0...v0.7.1) (2022-11-21)
 
 

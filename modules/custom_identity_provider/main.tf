@@ -51,8 +51,8 @@ resource "aws_lambda_function" "this_lambda" {
   runtime          = "python3.9"
   description      = "A function to lookup and return user data from AWS Secrets Manager."
   tags             = var.tags
-  filename         = "lib/lambda.zip"
-  source_code_hash = filebase64sha256("lib/lambda.zip")
+  filename         = "${path.module}/lib/lambda.zip"
+  source_code_hash = filebase64sha256("${path.module}/lib/lambda.zip")
 
   environment {
     variables = {

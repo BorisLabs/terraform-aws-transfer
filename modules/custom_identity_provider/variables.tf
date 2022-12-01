@@ -51,3 +51,9 @@ variable "api_gateway_stage_name" {
   description = "Name of the stage"
   type        = string
 }
+
+variable "identity_provider_lookup_lambda_name" {
+  default     = "TransferCustomIdentityProviderCredentialLookup"
+  description = "The name of the AWS Lambda function used to lookup user details from the custom identity provider. Must be unique."
+  type        = string
+}

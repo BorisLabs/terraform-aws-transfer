@@ -45,7 +45,7 @@ resource "aws_iam_role_policy_attachment" "policy" {
 # Lambda Deployment
 #
 resource "aws_lambda_function" "this_lambda" {
-  function_name    = "TransferCustomIdentityProviderCredentialLookup"
+  function_name    = var.identity_provider_lookup_lambda_name
   handler          = "lambda.lambda_handler"
   role             = coalesce(concat(aws_iam_role.this_lambda.*.arn, [])[0], var.lambda_role_arn)
   runtime          = "python3.9"

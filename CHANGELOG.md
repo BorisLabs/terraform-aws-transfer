@@ -1,5 +1,12 @@
 All notable changes to this terraform will be documented in this file.
 
+## [0.7.3](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.7.2...v0.7.3) (2023-06-12)
+
+
+### Bug Fixes
+
+* aws-iam-policy-document-data-resource ([3935afb](https://github.com/BorisLabs/terraform-aws-transfer/commit/3935afb14c0e3c417f23badfa4aa6bb7e786ea1a))
+
 ## [0.7.2](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.7.1...v0.7.2) (2022-11-30)
 
 

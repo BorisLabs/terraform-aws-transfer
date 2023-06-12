@@ -10,8 +10,8 @@ data "aws_iam_policy_document" "trust_policy" {
 }
 
 data "aws_iam_policy_document" "inline_policy" {
-  count         = var.create_iam_role ? 1 : 0
-  override_json = var.iam_role_policy_statements
+  count                     = var.create_iam_role ? 1 : 0
+  override_policy_documents = [var.iam_role_policy_statements]
 }
 
 data "aws_ssm_parameter" "user_ssh_key" {

@@ -1,5 +1,12 @@
 All notable changes to this terraform will be documented in this file.
 
+# [0.8.0](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.7.3...v0.8.0) (2023-06-13)
+
+
+### Features
+
+* add-security-policy-var ([9f73837](https://github.com/BorisLabs/terraform-aws-transfer/commit/9f7383703fcdc385d452788b48eb926dbb3717bb))
+
 ## [0.7.3](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.7.2...v0.7.3) (2023-06-12)
 
 

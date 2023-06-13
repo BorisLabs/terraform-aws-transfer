@@ -104,38 +104,43 @@ variable "function" {
 
 variable "url" {
   description = "URL of the service endpoint used to authenticate users with an identity_provider_type of API_GATEWAY"
-  default = ""
+  default     = ""
 }
 
 variable "invocation_role" {
   description = "Amazon Resource Name (ARN) of the IAM role used to authenticate the user account with an identity_provider_type of API_GATEWAY"
-  default = ""
+  default     = ""
 }
 
 variable "address_allocation_ids" {
   description = "A list of address allocation IDs that are required to attach an Elastic IP address to your SFTP server's endpoint. This property can only be used when endpoint_type is set to VPC"
   default     = []
-  type = list(string)
+  type        = list(string)
 }
 
 variable "security_group_ids" {
   description = "A list of security groups IDs that are available to attach to your server's endpoint. If no security groups are specified, the VPC's default security groups are automatically assigned to your endpoint. This property can only be used when endpoint_type is set to VPC."
   default     = []
-  type = list(string)
+  type        = list(string)
 }
 
 variable "subnet_ids" {
   description = "A list of subnet IDs that are required to host your SFTP server endpoint in your VPC. This property can only be used when endpoint_type is set to VPC"
   default     = []
-  type = list(string)
+  type        = list(string)
 }
 
 variable "vpc_endpoint_id" {
   description = "The ID of the VPC endpoint. This property can only be used when endpoint_type is set to VPC_ENDPOINT"
-  default = ""
+  default     = ""
 }
 
 variable "vpc_id" {
   description = "The VPC ID of the virtual private cloud in which the SFTP server's endpoint will be hosted. This property can only be used when endpoint_type is set to VPC."
-  default = ""
+  default     = ""
+}
+
+variable "security_policy_name" {
+  description = "Specifies the name of the security policy that is attached to the server"
+  default     = "TransferSecurityPolicy-2018-11"
 }

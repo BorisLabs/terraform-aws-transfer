@@ -9,6 +9,7 @@ resource "aws_transfer_server" "this" {
   function               = var.function
   url                    = var.url
   invocation_role        = var.invocation_role
+  security_policy_name   = var.security_policy_name
   endpoint_details {
     subnet_ids             = var.subnet_ids
     vpc_id                 = var.vpc_id

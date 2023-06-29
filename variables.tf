@@ -144,3 +144,14 @@ variable "security_policy_name" {
   description = "Specifies the name of the security policy that is attached to the server"
   default     = "TransferSecurityPolicy-2018-11"
 }
+
+variable "create_custom_hostname" {
+  description = "Whether to have custom hostname"
+  default     = false
+  type        = bool
+}
+
+variable "custom_hostname" {
+  description = "Custom hostname to use on transfer server"
+  default     = ""
+}

@@ -14,10 +14,17 @@ resource "aws_transfer_server" "this" {
     subnet_ids             = var.subnet_ids
     vpc_id                 = var.vpc_id
     security_group_ids     = var.security_group_ids
-    address_allocation_ids = var.address_allocation_ids
+    address_allocation_ids = var.internet_facing_eip && length(var.address_allocation_ids) == 0 ? aws_eip.this[*].id : var.address_allocation_ids
   }
 
   tags = var.tags
+}
+
+resource "aws_transfer_tag" "hostname" {
+  count        = var.create_custom_hostname ? 1 : 0
+  resource_arn = aws_transfer_server.this[0].arn
+  key          = "aws:transfer:customHostname"
+  value        = var.custom_hostname
 }
 
 resource "aws_route53_record" "this" {

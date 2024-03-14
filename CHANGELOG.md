@@ -1,5 +1,12 @@
 All notable changes to this terraform will be documented in this file.
 
+# [0.9.0](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.8.0...v0.9.0) (2024-03-14)
+
+
+### Features
+
+* allow-multiple-home-directory-mappings ([15f45fa](https://github.com/BorisLabs/terraform-aws-transfer/commit/15f45fa260a1398f5e5b9b48cb1503fc9e7499d0))
+
 # [0.8.0](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.7.3...v0.8.0) (2023-06-13)
 
 

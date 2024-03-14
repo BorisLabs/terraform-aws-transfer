@@ -57,8 +57,8 @@ variable "transfer_ssh_key_ssm_paths" {
 
 variable "home_directory_mappings" {
   description = "Logical directory mappings that specify what S3 paths and keys should be visible to your user and how you want to make them visible"
-  default     = {}
-  type        = map(string)
+  default     = []
+  type        = list(map(string))
 }
 
 variable "home_directory_type" {

@@ -1,5 +1,12 @@
 All notable changes to this terraform will be documented in this file.
 
+# [0.10.0](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.9.0...v0.10.0) (2024-12-04)
+
+
+### Features
+
+* Add ability to create secret for use with custom idp ([738e005](https://github.com/BorisLabs/terraform-aws-transfer/commit/738e005b1953a31d6d9cba2f266131a0cecaa5ec))
+
 # [0.9.0](https://github.com/BorisLabs/terraform-aws-transfer/compare/v0.8.0...v0.9.0) (2024-03-14)
 
 

@@ -1,6 +1,6 @@
 variable "transfer_server_id" {
   description = "ID of the AWs Transfer Server"
-  default = ""
+  default     = ""
 }
 
 variable "user_name" {
@@ -24,8 +24,8 @@ variable "iam_role_arn" {
 
 variable "tags" {
   description = "Tags to attach to transfer user"
-  default     = {}
-  type        = map(string)
+  default = {}
+  type = map(string)
 }
 
 variable "home_directory" {
@@ -40,8 +40,8 @@ variable "add_transfer_ssh_keys" {
 
 variable "transfer_ssh_key_bodys" {
   description = "Public key part of SSH Key for Transfer user being created."
-  default     = []
-  type        = list(string)
+  default = []
+  type = list(string)
 }
 
 variable "use_ssm" {
@@ -51,14 +51,14 @@ variable "use_ssm" {
 
 variable "transfer_ssh_key_ssm_paths" {
   description = "List of SSM Parameter store paths to retrieve public key from."
-  type        = list(string)
-  default     = ["/transfer/users/user"]
+  type = list(string)
+  default = ["/transfer/users/user"]
 }
 
 variable "home_directory_mappings" {
   description = "Logical directory mappings that specify what S3 paths and keys should be visible to your user and how you want to make them visible"
-  default     = []
-  type        = list(map(string))
+  default = []
+  type = list(map(string))
 }
 
 variable "home_directory_type" {
@@ -70,4 +70,22 @@ variable "home_directory_type" {
 variable "create_transfer_user" {
   description = "Create an transfer user"
   default     = true
+}
+
+variable "create_secret" {
+  description = "Create a secret for the transfer user"
+  default     = false
+  type        = bool
+}
+
+variable "secret_kms_key_id" {
+  description = "KMS key id for the secret"
+  default     = ""
+  type        = string
+}
+
+variable "secret_policy_statements" {
+  description = "JSON of Secret policy statements"
+  default     = ""
+  type        = string
 }

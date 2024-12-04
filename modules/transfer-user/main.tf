@@ -28,7 +28,7 @@ resource "aws_transfer_user" "this" {
 
 resource "aws_transfer_ssh_key" "ssh_key" {
   count     = var.add_transfer_ssh_keys ? length(local.all_key_bodies) : 0
-  body      = element(concat(local.all_key_bodies, [""]), count.index)
+  body = element(concat(local.all_key_bodies, [""]), count.index)
   server_id = var.transfer_server_id
   user_name = aws_transfer_user.this[0].user_name
 }
@@ -45,5 +45,14 @@ resource "aws_iam_role_policy" "inline_policy" {
   count  = var.create_iam_role ? 1 : 0
   policy = data.aws_iam_policy_document.inline_policy[0].json
   role   = aws_iam_role.this[0].id
+}
+
+resource "aws_secretsmanager_secret" "this" {
+  count       = var.create_secret ? 1 : 0
+  kms_key_id  = var.secret_kms_key_id
+  name        = "SFTP/${var.user_name}"
+  description = "Secret for ${var.user_name} to access FTPS server"
+  policy      = var.secret_policy_statements
+  tags = merge(var.tags, { Name = "${var.user_name}-secret", Role = "Secret for SFTP user" })
 }
 
